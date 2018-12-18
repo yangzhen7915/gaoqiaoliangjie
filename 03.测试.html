@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 需求：点击按钮，让按钮的背景色变红 -->
+  <!-- 需求升级：点击按钮，1秒以后，让按钮的背景色变红 -->
+  <button id="btn">按钮</button>
+
+  <script>
+    // document.getElementById('btn').onclick = function () {
+    //   // 注意：默认 this 指向调用者
+    //   this.style.backgroundColor = 'red'
+    // }
+
+    /* document.getElementById('btn').onclick = function () {
+      setTimeout(function () {
+        console.log(this)
+        this.style.backgroundColor = 'red'
+      }, 1000)
+    } */
+
+
+    document.getElementById('btn').onclick = function () {
+      // 箭头函数内部的this，永远指向箭头函数外面的this
+      setTimeout(() => {
+        console.log(this)
+        this.style.backgroundColor = 'red'
+      }, 1000)
+    }
+  </script>
+</body>
+
+</html>
