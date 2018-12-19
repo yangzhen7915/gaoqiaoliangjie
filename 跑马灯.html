@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="跑" @click='pao'>
+        <input type="button" value="停" @click='stop'>
+        <h4> {{ msg }} </h4>
+    </div>
+    <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: '红红火火恍恍惚惚~~~',
+                    intervalId: null
+                },
+                methods: {
+                    pao() {
+                        this.intervalId = setInterval(() => {
+                            var start = this.msg.substr(0, 1)
+                            var end = this.msg.substr(1)
+                            this.msg = end + start
+                        }, 400)
+                    },
+                    stop() {
+                        clearInterval(this.intervalId)
+                        this.intervalId = null;
+                    }
+                }
+            })
+        </script>
+</body>
+
+
+</html>
