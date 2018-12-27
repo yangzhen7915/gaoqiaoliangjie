@@ -1,0 +1,59 @@
+1.理解getParamByUrl方法：
+//getParamByUrl方法的第一个参数应该传入完整的地址栏地址
+//getParamByUrl方法的第二个参数应该传入需要获取的参数对应的参数名
+//getParamByUrl方法将会返回需要获取的参数值
+function getParamByUrl(url,name){
+	//将url地址字符串中 “?” 之后的所有字符截取出来赋值给params
+	var params = url.substr(url.indexOf("?")+1);
+	//将字符串params按照“&”符号进行分隔
+	var param = params.split("&");
+	//遍历分隔出来的所有内容		
+	for(var i=0;i<param.length;i++){
+		//将第i个分隔出来的内容再按照“=”符号进行分隔
+		var current = param[i].split("=");
+		//判断分隔出来的参数名是否与传递的参数名一致
+		if(current[0] == name){
+			//返回参数值
+			return current[1];
+		}
+	}
+	//如果循环中没有查找到与参数名一致的参数，则返回null
+	return null;
+}
+
+2.mui的上拉加载组件的使用：
+<div class="mui-scroll-wrapper">
+	<div class="mui-scroll">
+		<!--这里放置真实显示的DOM内容-->
+	</div>
+</div>
+
+
+mui.init({
+  pullRefresh : {
+    container:".mui-scroll-wrapper",//注意：container应设置为区域滚动组件
+    up : {
+      height:50,//可选.默认50.触发上拉加载拖动距离
+      auto:true,//可选,默认false.自动上拉加载一次
+      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+      callback:getData//回调函数getData,当上拉加载时调用getData
+    }
+  }
+});
+
+
+function getData(){
+	//重置上拉加载(之前如果设置成了没有更多内容，可以重置进行继续上拉加载)
+	mui(".mui-scroll-wrapper").pullRefresh().refresh(true);
+	//如果.endPullupToRefresh方法传递的参数为false，则可以继续进行上拉
+	//如果.endPullupToRefresh方法传递的参数为true，则无法继续进行上拉
+	mui(".mui-scroll-wrapper").endPullupToRefresh(true|false);
+
+}
+
+3.mui禁止了a标签的原生跳转，可以调用mui提供的方法进行跳转：
+//跳转到index.html页面
+mui.openWindow({
+	url:"index.html"
+})
