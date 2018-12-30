@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>这是一个动态渲染的页面</h1>
+  <h6>通过 Node 服务器，结合 art-template 模板引擎渲染的动态页面</h6>
+  <p>姓名：{{name}}</p>
+  <p>年龄：{{age}}</p>
+  <p>
+    爱好： 
+    {{each hobby}} 
+    <span>{{$value}}</span>
+    {{/each}}
+  </p>
+</body>
+
+</html>
